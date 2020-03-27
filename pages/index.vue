@@ -40,7 +40,7 @@
       </v-list>
     </v-col>
     <v-col> </v-col>
-    <v-dialog v-model="dialog">
+    <v-dialog dark overlay-opacity="0.98" v-model="dialog">
       <v-card
         color="#385F73"
         dark
@@ -48,17 +48,12 @@
         max-width="600"
         class="mx-auto"
       >
-        <v-list-item>
-          <v-list-item-avatar color="grey"></v-list-item-avatar>
-          <v-list-item-content>
-            <v-list-item-title class="headline">{{
-              elementos[0].paciente
-            }}</v-list-item-title>
-            <v-list-item-subtitle>{{
-              elementos[0].paciente
-            }}</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+        <v-card-title class="headline">
+          {{ elementos[0].paciente }}
+        </v-card-title>
+        <v-card-actions>
+          {{ elementos[0].consultorio }}
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </v-row>
@@ -91,23 +86,28 @@ export default {
     return {
       slides: [
         {
-          name: "Imagen Clinica Coronavirus",
-          src: "http://www.cnym.com.ar/img/covid19/banner.jpg",
-          type: "image",
-          timeout: 10000
-        },
-        {
-          name: "Imagen Clinica Coronavirus",
-          src: "http://www.cnym.com.ar/img/covid19/banner.jpg",
-          type: "image",
-          timeout: 10000
-        },
-        {
           name: "Video Institucional",
           src: "/videos/NuevocoronavirusCOVID19.mp4",
           type: "video",
           timeout: 7000
         }
+        /*
+        {
+          name: "Video Institucional",
+          src: "/images/fondo.jpg",
+          type: "image",
+          timeout: 9000,
+          style: ""
+        },
+        */
+        /*
+        {
+          name: "Video Institucional",
+          src: "/videos/Rimbamband.mp4",
+          type: "video",
+          timeout: 7000
+        }
+        */
       ],
       elementos: [],
       dialog: false
@@ -120,11 +120,17 @@ export default {
     }
   },
   mounted() {
+    /*
+    this.elementos.push({
+      paciente: "PACIENTE DE PRUEBA MOCK",
+      consultorio: "CONSULTORIO PRUEBA"
+    });
+    this.dialog = true;
+      */
     let pusher = new Pusher("5e9afaa1faa1698efbe9", {
       cluster: "us2",
       encrypted: true
     });
-
     let channel = pusher.subscribe("guardia");
     channel.bind("publicar_llamado", data => {
       if (this.elementos.length == cantMaxElements) this.elementos.pop();

@@ -1,12 +1,22 @@
 <template>
-  <div
+  <v-row>
+    <v-col cols="12">
+      <div
     v-observe-visibility="{
       callback: callbackMedia,
       intersection: { threhold: 1.0 }
     }"
   >
-    <img :alt="mediaObject.name" :src="mediaObject.src" class="responsive"></img>
+
+    <img max-width=""
+      :alt="mediaObject.name"
+      :src="mediaObject.src"
+      class="responsive"
+    ></img>
   </div>
+    </v-col>
+  </v-row>
+  
 </template>
 
 <script>
@@ -44,8 +54,8 @@ export default {
 </script>
 
 <style scoped>
-  .responsive {
-      max-width: 100%;
-      height: auto;
-  }
+.responsive {
+  object-fit: contain;
+  width: 60%;
+}
 </style>

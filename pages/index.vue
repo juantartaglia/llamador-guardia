@@ -90,16 +90,22 @@ export default {
           src: "/videos/NuevocoronavirusCOVID19.mp4",
           type: "video",
           timeout: 7000
-        }
-        /*
+        },
         {
           name: "Video Institucional",
-          src: "/images/fondo.jpg",
+          src: "/images/quedate1.jpg",
           type: "image",
           timeout: 9000,
           style: ""
         },
-        */
+        {
+          name: "Video Institucional",
+          src: "/images/quedate2.jpg",
+          type: "image",
+          timeout: 9000,
+          style: ""
+        }
+
         /*
         {
           name: "Video Institucional",

@@ -26,9 +26,12 @@
       </v-carousel>
     </v-col>
     <v-col :cols="3">
-      <v-list disabled>
-        <v-subheader>Ultimos Llamados</v-subheader>
-
+      <v-list>
+        <v-subheader
+          ><v-btn text small @click="playSound()"
+            >Ultimos Llamados
+          </v-btn></v-subheader
+        >
         <v-list-item v-for="(item, i) in elementos" :key="i">
           <v-list-item-content>
             <v-list-item-title v-text="item.paciente"></v-list-item-title>
@@ -63,6 +66,7 @@
 import { mapState } from "vuex";
 import VideoView from "../components/VideoView";
 import ImageView from "../components/ImageView";
+require("howler");
 
 var cantMaxElements = 5;
 export default {
@@ -123,6 +127,14 @@ export default {
     nextElement() {
       this.$store.commit("busy");
       this.$refs.carousel1.next();
+    },
+    playSound() {
+      console.log("Play sound");
+      var sound = new Howl({
+        src: "./sounds/ding-dong.mp3",
+        volume: 0.9
+      });
+      sound.play();
     }
   },
   mounted() {
@@ -144,6 +156,7 @@ export default {
       /*
       if (this.player && this.player.paying) this.player.pause();
       */
+      this.playSound();
       this.dialog = true;
       setTimeout(() => {
         this.dialog = false;
